@@ -1,0 +1,21 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=1208
+
+vimCU is a set of ViM functions that you can use to customize your ViM editor to comment/uncomment source code of every language you like.
+
+Comment key binding defaults to ",#" while uncomment key binding to ",3" (mnemonic: same key as comment, but without shift). In command mode the current line will be commented/uncommented, in visual mode all selected lines will.
+
+In order to support commenting in the language of your choice you've to define how comments are handled in that language defining the following local variables:
+
+- variable "b:CommentType". A string formed using "s" and/or "m" chars; "s" means that your language supports single line comment like, e.g., bash script, perl or similar, that are comments formed adding something at the beginning and at the end of a line; "m" means that your language supports multi line comment like, e.g. ANSI C, OCaml, or similar, that are comments that extends from a character set to another character set; "ms" or "sm" mean that your language supports both kinds of comments like, e.g., C++.
+
+- variables: "b:beginOfCommentSingle", "b:endOfCommentSingle". Strings that are used to begin and end a single line comment. These strings are added at the begin and at the end of the line you want to commend.
+
+- variables: "b:beginOfCommentMulti", "b:endOfCommentMulti". Strings that are used to begin and end a multi line comment. These strings are added before and after the line(s) you are commenting on a line by themeselves.
+
+For example, in order to support C++, just add to your ~/.vim/ftplugin/cpp.vim the following lines:
+      let b:CommentType = "ms"
+      let b:beginOfCommentSingle = "// "
+      let b:endOfCommentSingle = ""
+      let b:beginOfCommentMulti = "/*"
+      let b:endOfCommentMulti = "*/"
+
